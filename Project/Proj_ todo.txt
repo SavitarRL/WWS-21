@@ -1,0 +1,14 @@
+Week 1: Prep & experiment
+Week 2: Try & Error with codes
+Week 3: Type things up
+
+Meeting 1 with Hatem:
+
+things to bring up:
+
+1. project title & description
+2. methods (machine learning? brute force algorithm?) get the intuition
+3. question on the renormalisation group
+4. advice on how and where to start after reading the background materials
+5. chance of publishing a paper if it is in publishable quality: can do
+
