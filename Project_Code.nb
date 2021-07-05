@@ -10,17 +10,2570 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[       825,         34]
-NotebookOptionsPosition[       561,         21]
-NotebookOutlinePosition[       965,         37]
-CellTagsIndexPosition[       922,         34]
+NotebookDataLength[    117841,       2687]
+NotebookOptionsPosition[    110226,       2572]
+NotebookOutlinePosition[    110693,       2590]
+CellTagsIndexPosition[    110650,       2587]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
+Cell["Distributed Consensus Problem -- Testing ", "Section",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellChangeTimes->{{3.833963103734907*^9, 3.8339632349665966`*^9}, {
+   3.8339632746757*^9, 3.833963300182876*^9}, 3.833963512465029*^9, 
+   3.8340532183939304`*^9},ExpressionUUID->"1fb7b059-a13e-4571-a023-\
+c8c0b32dd6a8"],
+
+Cell["\<\
+
+From: https://writings.stephenwolfram.com/2021/05/the-problem-of-distributed-\
+consensus/\
+\>", "Text",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellChangeTimes->{{3.8339633043211455`*^9, 3.8339633431761465`*^9}, 
+   3.833963512465029*^9},ExpressionUUID->"c3342333-8e0e-43cc-9e40-\
+afbaf6463fa8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "From The Webpage:",
+ Cell[BoxData[
+  RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+  ExpressionUUID->"53bdab77-c2d0-47a7-81bf-04769d8010ef"]
+}], "Subsubsection",
+ CellGroupingRules->{"GroupTogetherGrouping", 10001.},
+ CellChangeTimes->{{3.833963103734907*^9, 3.8339632349665966`*^9}, {
+   3.8339632746757*^9, 3.833963294254567*^9}, {3.8339633652388287`*^9, 
+   3.8339633787107553`*^9}, 3.833963420069972*^9, {3.833963468855954*^9, 
+   3.833963480019986*^9}, 
+   3.833963518553508*^9},ExpressionUUID->"da8584a6-2b66-45bb-bd29-\
+bb81142e2b47"],
+
+Cell["\<\
+
+A simple Distributive Consensus problem : with 3 colours\
+\>", "Section",
+ CellGroupingRules->{"GroupTogetherGrouping", 10001.},
+ CellChangeTimes->{
+  3.833963484403979*^9, {3.83396351855447*^9, 3.833963559161202*^9}, {
+   3.8340500133088593`*^9, 3.834050034972579*^9}, {3.8340530307573757`*^9, 
+   3.8340530453449593`*^9}, {3.8340531053792133`*^9, 
+   3.8340531057406836`*^9}, {3.8340532209826775`*^9, 
+   3.8340532260694666`*^9}},ExpressionUUID->"12101d61-4f1e-4a6c-9c37-\
+6eec87bee037"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"BlockRandom", "[", 
+    RowBox[{
+     RowBox[{"SeedRandom", "[", "77", "]"}], ";", " ", 
+     RowBox[{"(*", 
+      RowBox[{"create", " ", "randomly", " ", "77", " ", "seeds"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"redd", " ", "=", " ", 
+      RowBox[{"Hue", "[", 
+       RowBox[{"0.15", ",", "0.72", ",", "1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"yelloww", " ", "=", " ", 
+      RowBox[{"Hue", "[", 
+       RowBox[{"0.98", ",", "1", ",", "0.8200000000000001"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"bluee", " ", "=", " ", 
+      RowBox[{"Hue", "[", 
+       RowBox[{"0.60", ",", "1", ",", "0.8200000000000001"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"initstate", " ", "=", " ", 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"pts", "=", 
+           RowBox[{
+            RowBox[{"RandomPointConfiguration", "[", 
+             RowBox[{
+              RowBox[{"HardcorePointProcess", "[", 
+               RowBox[{"0.10", ",", "2", ",", "2"}], "]"}], ",", 
+              RowBox[{"Rectangle", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+            "\"\<Points\>\"", "]"}]}], ",", "clrs"}], "}"}], ",", " ", 
+        RowBox[{"(*", 
+         RowBox[{"setting", " ", "the", " ", "points", " ", "parameters"}], 
+         "*)"}], 
+        RowBox[{
+         RowBox[{"clrs", "=", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"RandomChoice", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+              RowBox[{"{", 
+               RowBox[{"redd", ",", "yelloww", ",", " ", "bluee"}], "}"}]}], 
+             "]"}], ",", 
+            RowBox[{"Length", "[", "pts", "]"}]}], "]"}]}], ";", " ", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{
+           "represents", " ", "a", " ", "color", " ", "in", " ", "the", " ", 
+            "HSB", " ", "color", " ", "space", " ", "with", " ", "hue", " ", 
+            StyleBox["h", "TI"]}], 
+           StyleBox[",", "TI"], 
+           StyleBox[" ", "TI"], 
+           StyleBox[
+            RowBox[{
+             RowBox[{"saturation", " ", "&"}], " ", "brightness"}], "TI"]}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"EdgeForm", "[", "Gray", "]"}], ",", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"Disk", "[", 
+                 RowBox[{"pts", "[", 
+                  RowBox[{"[", "n", "]"}], "]"}], "]"}], ",", 
+                RowBox[{"clrs", "[", 
+                 RowBox[{"[", "n", "]"}], "]"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"n", ",", 
+                RowBox[{"Range", "[", 
+                 RowBox[{"Length", "[", "pts", "]"}], "]"}]}], "}"}]}], 
+             "]"}]}], "}"}], "]"}]}]}], "]"}]}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "showing", " ", "the", " ", "Graphics", " ", "from", " ", "the", " ", 
+     "parameters", " ", "above"}], "*)"}]}]}]], "Input",
+ CellChangeTimes->{{3.8339633955188284`*^9, 3.8339634082062693`*^9}, {
+  3.834052113614652*^9, 3.8340521900442376`*^9}, {3.834052224835864*^9, 
+  3.8340522299570627`*^9}, {3.8340522829044933`*^9, 3.834052286484968*^9}, {
+  3.8340523486725616`*^9, 3.834052450721592*^9}, {3.834053231836584*^9, 
+  3.8340532324279995`*^9}, {3.8340537820950212`*^9, 3.8340538651461287`*^9}, {
+  3.834053922409972*^9, 3.8340540137882814`*^9}, {3.8340541556727686`*^9, 
+  3.8340541685675125`*^9}, {3.8340542938807025`*^9, 
+  3.8340543075500636`*^9}},ExpressionUUID->"3345c971-e664-41fe-8944-\
+9bf11398314f"],
+
+Cell[BoxData[
+ GraphicsBox[
+  {EdgeForm[GrayLevel[0.5]], 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{27.738371264894123, 35.54133905415651}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{17.624267154127427, 7.693343307327449}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{41.53708090795565, 15.370993979165348}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{14.665693866621677, 22.643725171361385}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{13.855804360383662, 9.316065543615004}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{24.58319308517829, 19.266290947347255}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{24.872569286068348, 40.382216065938735}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{15.505883124107722, 45.024779211301556}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{35.27121524518253, 42.01967273199115}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{24.09657461358641, 1.2214265452566653}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{16.38965737003858, 38.456340063467664}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{28.832765343635103, 18.100613464643445}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{11.457709194260168, 40.90882703441863}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{6.658695674964621, 23.69943556195685}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{18.524537318273428, 41.23352235749954}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{7.426268537173142, 17.1620351624004}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{21.743036582714346, 43.06610769214993}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{32.56812972631028, 18.5610565280256}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{32.71377871992689, 39.28186510253128}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{4.59875047035111, 10.94235603368402}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{18.890958727206453, 27.142711279839826}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{38.114306503558296, 24.106149764016106}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{28.78650468002808, 12.738120762677207}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{3.617159556731453, 13.730725960073453}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{40.401568899750885, 7.956679165391001}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{28.06124535260587, 37.6346732948604}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{22.411396959825638, 33.73438751384739}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{26.801803031324788, 22.150107349539184}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{21.490851387840625, 8.6329738339742}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{9.428051465740406, 15.709495738637036}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{8.324482311920578, 0.2786590005793288}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{29.11155899838864, 30.480906309360968}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{45.312563313302235, 37.59779541961316}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{3.425486802766109, 18.615252033463804}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{33.539050422332615, 11.452440073247994}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{23.235695742040395, 29.391129373545276}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{43.585238150813524, 15.345975836783477}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{5.495128535666716, 40.53751265114079}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{21.872519561678004, 3.849808499275431}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{38.416926234323924, 19.579012475135848}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{42.44168371573572, 10.511626371076954}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{48.638953218930304, 34.93815007717688}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{8.323629457440285, 20.95883095901764}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{13.679739130468349, 49.34124849391709}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{25.218764969360507, 30.22129208072283}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{2.2966211712938778, 34.32738822401682}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{26.36351181305825, 27.57050893631631}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{37.90478175097953, 3.917306326405101}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{34.06670338580312, 5.2128349863704955}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{27.916763874101836, 15.220477832782564}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{8.675692384192214, 43.32079008156078}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{10.350005938734864, 7.153861994122668}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{9.003272347291269, 33.7334927779224}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{5.655161760561778, 29.347315985199927}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{26.55636200134326, 47.35384779052861}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{25.59300568203823, 42.427805765754215}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{38.771483734643994, 0.3374809490571895}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{38.36031477288467, 35.47600042249152}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{27.43681995554631, 31.786538918331676}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{45.20965549872115, 6.12503363395337}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{6.517020274798568, 34.29936664801879}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{42.84666725091771, 3.8376507802742155}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{25.425999981989456, 9.19315277054542}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{10.966247988769084, 12.137261111899155}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{0.8807992021630295, 30.18811528201153}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{48.09938192024846, 20.056896885626884}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{19.263676791756666, 1.5153491443966938}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{48.89761889388288, 4.8857258880279915}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{16.869712088321997, 33.79402403686528}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{39.09987183269481, 17.311385813620085}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{25.18221866299757, 16.724759712979242}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{24.023277940269207, 37.29290856070004}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{39.02194867748799, 39.982179168217854}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{1.976288762603895, 8.348532536507768}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{42.30209637675393, 44.877927671115735}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{36.71573008563001, 37.66278695426155}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{17.6774145688965, 3.3320388617874452}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{15.687823863131179, 10.773478046337658}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{0.3997422967287556, 37.33729278820631}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{33.67931480854976, 34.51464931577699}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{49.72521884788782, 22.32503559573419}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{42.159929470639035, 37.571548759831174}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{5.313251891700654, 17.163347348046553}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{13.313100616825524, 38.7600794264641}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{39.04980602873482, 5.8079017488635865}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{37.07556647865482, 27.922230214540512}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{47.33837805216551, 1.0849010138424098}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{30.720065829737088, 36.45942349382607}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{12.70387658497134, 0.1277577978195943}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{29.28835627134839, 41.69858547162695}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{34.58499863971633, 19.611310712307073}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{28.706219613914698, 45.51377953574632}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{16.103418707164163, 24.371817320550125}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{34.0046043395373, 1.8039302763363407}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{2.294742114649495, 21.625550602238764}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{12.89636119340124, 25.499085619285033}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{10.856077209757032, 22.137880898728103}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{29.98573517979912, 24.487634518242018}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{31.268676289479668, 6.5185030883599175}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{12.95222055048021, 20.56350370462653}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{33.95879567901, 37.26455895328178}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{49.29782878603389, 40.193405326360455}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{47.38997658669526, 38.20531141023705}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{22.67102456946629, 17.824251579428328}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{44.88564996511073, 2.3468530173440416}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{17.879689018237233, 37.072684380788864}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{40.629530816106175, 24.36075974659445}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{12.55805923471166, 30.753197868895466}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{7.618225995744576, 26.09259488990122}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{49.1692222410161, 44.23318893638923}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{0.5479355547862608, 48.93922322333053}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{10.450541508918665, 30.033305482691986}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{36.548642555818766, 21.067576530589083}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{6.910733348232101, 2.7022442362069743}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{3.2480503917758696, 43.54283115204747}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{29.600858007415244, 2.0124861563690755}]}, 
+   {Hue[0.98, 1, 0.8200000000000001], 
+    DiskBox[{11.713546084232728, 33.83032720265984}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{36.15850768573661, 49.341707543016156}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{7.368281383726627, 10.29004540159234}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{46.64158034304846, 33.54887691633067}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{5.766281341981339, 5.723494409675112}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{37.70983522356668, 10.873954028130239}]}, 
+   {Hue[0.6, 1, 0.8200000000000001], 
+    DiskBox[{7.623426517065668, 7.320310987762657}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{44.553715495923285, 43.61351202136121}]}, 
+   {Hue[0.15, 0.72, 1], DiskBox[{18.209846996760426, 16.917723946745443}]}}]],\
+ "Input",
+ CellChangeTimes->{3.834054370679038*^9},
+ CellLabel->
+  "Out[275]=",ExpressionUUID->"a568d5c5-9575-431a-a244-3bd40e912b34"],
+
+Cell["\<\
+
+to efficiently find the most common colour among the nodes / finding the \
+majority of the colour: 
+First connect each node to some number of neighbors, picking the neighbors \
+according to the spatial layout of the nodes:\
+\>", "Text",
+ CellChangeTimes->{{3.834049927325515*^9, 3.834049974206088*^9}, {
+  3.834052485763265*^9, 3.83405249902479*^9}, {3.834052535626232*^9, 
+  3.8340525952015505`*^9}},ExpressionUUID->"eaca412b-385a-44bd-931d-\
+46dceb49ac20"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ConsensusState", "[", 
+      RowBox[{"points_", ",", " ", "colors_", ",", " ", 
+       RowBox[{"nn_", " ", ":", " ", "5"}]}], "]"}], " ", ":=", " ", "\n", 
+     " ", 
+     RowBox[{"NearestNeighborGraph", "[", 
+      RowBox[{"points", ",", " ", "nn", ",", " ", 
+       RowBox[{"DirectedEdges", " ", "->", " ", "True"}], ",", " ", "\n", 
+       "  ", 
+       RowBox[{"DistanceFunction", " ", "->", " ", "EuclideanDistance"}], ",",
+        " ", "\n", "  ", 
+       RowBox[{"VertexStyle", " ", "->", " ", 
+        RowBox[{"MapThread", "[", 
+         RowBox[{"Rule", ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"points", ",", " ", "colors"}], "}"}]}], "]"}]}], ",", " ",
+        "\n", "  ", 
+       RowBox[{"VertexSize", " ", "->", " ", "0.75"}], ",", " ", 
+       RowBox[{"EdgeStyle", " ", "->", " ", "Black"}]}], "]"}]}], ";"}], " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"above", " ", "defines", " ", "a", " ", "function"}], "*)"}], 
+   "\n", "\n", 
+   RowBox[{"BlockRandom", "[", 
+    RowBox[{
+     RowBox[{"SeedRandom", "[", "100", "]"}], ";", " ", "\n", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"pts", "=", 
+          RowBox[{
+           RowBox[{"RandomPointConfiguration", "[", 
+            RowBox[{
+             RowBox[{"HardcorePointProcess", "[", 
+              RowBox[{"0.10", ",", "2", ",", "2"}], "]"}], ",", 
+             RowBox[{"Rectangle", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+           "\"\<Points\>\"", "]"}]}], ",", "clrs"}], "}"}], ",", " ", 
+       RowBox[{"(*", 
+        RowBox[{"setting", " ", "the", " ", "points", " ", "parameters"}], 
+        "*)"}], 
+       RowBox[{
+        RowBox[{"clrs", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"RandomChoice", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+             RowBox[{"{", 
+              RowBox[{"redd", ",", "yelloww", ",", " ", "bluee"}], "}"}]}], 
+            "]"}], ",", 
+           RowBox[{"Length", "[", "pts", "]"}]}], "]"}]}], ";", " ", "\n", 
+        "  ", 
+        RowBox[{"ConsensusState", "[", 
+         RowBox[{"pts", ",", " ", "clrs"}], "]"}]}]}], "]"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.8339683579084554`*^9, 3.833968358950843*^9}, {
+  3.834052502855789*^9, 3.834052522087185*^9}, {3.8340526241506042`*^9, 
+  3.834052641117309*^9}, {3.834052698842925*^9, 3.8340527023676977`*^9}, {
+  3.8340532380009174`*^9, 3.8340532385803237`*^9}, {3.8340541081867266`*^9, 
+  3.8340541103948326`*^9}, {3.834054274996742*^9, 3.834054283080037*^9}, {
+  3.834054316641724*^9, 3.834054357225031*^9}, {3.8340543908530426`*^9, 
+  3.8340544137716465`*^9}, {3.83405444394031*^9, 3.834054452803639*^9}},
+ CellLabel->
+  "In[286]:=",ExpressionUUID->"468638aa-6ad0-4487-9e8f-1c2e5b824949"],
+
+Cell["\<\
+
+at each step updating the color of each node to be whatever the \
+\[OpenCurlyDoubleQuote]majority color\[CloseCurlyDoubleQuote] of its \
+neighbors is 
+--> \tconverges after a few steps to make all nodes have the \
+\[OpenCurlyDoubleQuote]majority color\[CloseCurlyDoubleQuote] (which here is \
+yellow)\[LongDash]or in effect \t\[OpenCurlyDoubleQuote]agree\
+\[CloseCurlyDoubleQuote] on what the majority color is:
+\
+\>", "Text",
+ CellChangeTimes->{{3.8340528028818073`*^9, 3.8340528371867247`*^9}, 
+   3.834055501318654*^9},ExpressionUUID->"2d3970f1-594b-4700-bc12-\
+0d2e74031bf6"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 1: 8 nearest neighbours (nn),  20 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}], 100 seed random\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340557790565023`*^9, 
+  3.8340557817325525`*^9}, {3.834056008824902*^9, 3.834056009448198*^9}, {
+  3.834057737617876*^9, 
+  3.834057743068058*^9}},ExpressionUUID->"2f8fdca0-93e8-4482-92ea-\
+7391145e4193"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "8"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "8"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "20"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340557972643476`*^9, 3.8340557983357515`*^9}, {3.834056012176073*^9, 
+  3.834056013005289*^9}},
+ CellLabel->
+  "In[379]:=",ExpressionUUID->"58d587a9-cd99-4dcf-8585-efe5a2e02c82"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 2: 5 nearest neighbours (nn),  15 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.834057749375856*^9, 
+  3.834057752251834*^9}},ExpressionUUID->"9b58878e-92a8-4267-a7dc-\
+1f9fd4306af6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "5"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "5"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "20"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560177853518`*^9, 
+  3.834056018633723*^9}},
+ CellLabel->
+  "In[395]:=",ExpressionUUID->"21f0c351-0d77-4706-ae0f-f56d1a2f3421"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.834056119919526*^9},
+ CellLabel->
+  "In[399]:=",ExpressionUUID->"137b3581-2351-4e61-a7f0-0d6328629cfd"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 3: 10 nearest neighbours (nn),  15 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340577593910236`*^9, 
+  3.834057761219983*^9}},ExpressionUUID->"678a15d8-9e18-48f9-b61e-\
+daa9c6484e29"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "20"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}},
+ CellLabel->
+  "In[416]:=",ExpressionUUID->"2e2c5865-8b6c-4f49-b615-4fd86d544f3b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 4: 20 nearest neighbours (nn),  15 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.8340578198695545`*^9, 
+  3.8340578223873615`*^9}},ExpressionUUID->"842e3260-aa7b-4f65-bc25-\
+5708bdb43d73"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "20"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}},
+ CellLabel->
+  "In[420]:=",ExpressionUUID->"2e39391f-c61d-492b-b4a4-273ed5a1167a"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 
+  3.834056912775744*^9}},ExpressionUUID->"8a384665-232d-41a4-a24f-\
+8a48aa70328c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 5: 20 nearest neighbours (nn),  40 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.8340570625007324`*^9, 3.8340570634284782`*^9}, {
+  3.8340572009494357`*^9, 3.834057201929556*^9}, {3.83405782815099*^9, 
+  3.8340578305490227`*^9}},ExpressionUUID->"829ec2db-9f7d-4bff-8055-\
+b52963bebf21"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "10"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "40"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}, {3.8340570806076407`*^9, 
+  3.8340570809587793`*^9}},
+ CellLabel->
+  "In[424]:=",ExpressionUUID->"d0ca8c19-c2dd-4c57-96a6-1dc37d8c5bf4"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 
+  3.834056912775744*^9}},ExpressionUUID->"00dc83f2-b3e0-4315-a208-\
+c972d8a89a07"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 6: 40 nearest neighbours (nn),  40 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.834057216203842*^9, 3.8340572185527177`*^9}, {
+  3.834057900551714*^9, 
+  3.8340579032787895`*^9}},ExpressionUUID->"dd5f5d35-a4cf-47fc-9b9b-\
+6f8861f001d2"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "40"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "40"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "40"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}, {3.8340572207184887`*^9, 
+  3.834057230613713*^9}},
+ CellLabel->
+  "In[428]:=",ExpressionUUID->"74dc958b-1429-4026-baf8-0cda0f0cc311"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 
+  3.834056912775744*^9}},ExpressionUUID->"6932782b-48c8-4a40-8ba9-\
+034b9b31e1b3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Trial 7: 30 nearest neighbours (nn),  40 repeats,  RandomChoice[{.45,.35,.25 \
+}->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.834057216203842*^9, 3.8340572185527177`*^9}, {
+  3.834057624935665*^9, 3.834057625314494*^9}, {3.8340579151346235`*^9, 
+  3.834057918301032*^9}},ExpressionUUID->"248f875b-f509-472e-bcdc-\
+4bae922b9f3b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "30"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "30"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "40"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}, {3.8340572207184887`*^9, 
+  3.834057230613713*^9}, {3.834057937901183*^9, 3.834057941619882*^9}},
+ CellLabel->
+  "In[436]:=",ExpressionUUID->"f6bc0c36-afa0-4b5f-bc95-dbe54348bd53"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 
+  3.834056912775744*^9}},ExpressionUUID->"7c30d923-93a3-44d2-8aaa-\
+643b725f0538"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+25 nearest neighbours (nn),  40 repeats,  RandomChoice[{.45,.35,.25 }->{Red, \
+Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.834057216203842*^9, 3.8340572185527177`*^9}, {
+  3.8340575983749776`*^9, 3.8340576003659325`*^9}, {3.83405796764896*^9, 
+  3.8340579683089895`*^9}},ExpressionUUID->"7354dc23-777d-4118-80cc-\
+8825ddb86ba5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ConsensusState", "[", 
+    RowBox[{"points_", ",", "colors_", ",", 
+     RowBox[{"nn_", ":", "25"}]}], "]"}], ":=", 
+   RowBox[{"NearestNeighborGraph", "[", 
+    RowBox[{"points", ",", "nn", ",", 
+     RowBox[{"DirectedEdges", "->", "True"}], ",", 
+     RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+     RowBox[{"VertexStyle", "->", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"Rule", ",", 
+        RowBox[{"{", 
+         RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+     RowBox[{"VertexSize", "->", "0.75"}], ",", 
+     RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"NodeDependencies", "[", 
+   RowBox[{"points_", ",", 
+    RowBox[{"nn_", ":", "25"}]}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"n", "->", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Position", "[", 
+          RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+        RowBox[{"VertexOutComponent", "[", 
+         RowBox[{
+          RowBox[{"NearestNeighborGraph", "[", 
+           RowBox[{"points", ",", "nn", ",", 
+            RowBox[{"DirectedEdges", "->", "True"}], ",", 
+            RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], "]"}], 
+          ",", 
+          RowBox[{"points", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"SynchronousStepNewColors", "[", 
+   RowBox[{"dependencies_", ",", "colors_"}], "]"}], ":=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"neighbors", "=", 
+          RowBox[{"Sort", "[", 
+           RowBox[{
+            RowBox[{"Counts", "[", 
+             RowBox[{"Part", "[", 
+              RowBox[{"colors", ",", 
+               RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+            "Greater"}], "]"}]}], "}"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"DuplicateFreeQ", "[", 
+           RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+          RowBox[{"colors", "[", 
+           RowBox[{"[", 
+            RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+      "&"}], ",", "dependencies"}], "]"}], "]"}]}], "\n", 
+ RowBox[{"GraphicsGrid", "[", 
+  RowBox[{
+   RowBox[{"Partition", "[", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"pts", "=", 
+            RowBox[{
+             RowBox[{"RandomPointConfiguration", "[", 
+              RowBox[{
+               RowBox[{"HardcorePointProcess", "[", 
+                RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+               RowBox[{"Rectangle", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+             "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", "highlights"}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"clrslist", "=", 
+           RowBox[{"NestList", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"SynchronousStepNewColors", "[", 
+               RowBox[{
+                RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}], 
+               "]"}], "&"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                 RowBox[{"{", 
+                  RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                  "}"}]}], "]"}], ",", 
+               RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "40"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"MapIndexed", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"colors", "=", "#"}], "}"}], ",", 
+               RowBox[{"Graph", "[", 
+                RowBox[{
+                 RowBox[{"ConsensusState", "[", 
+                  RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                 RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], "&"}], 
+            ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", "5"}], "]"}], 
+   ",", 
+   RowBox[{"ImageSize", "->", "1700"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+  3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+  3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+  3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+  3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+  3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+  3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+  3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+  3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+  3.8340564557530117`*^9, 3.834056479725687*^9}, {3.8340572207184887`*^9, 
+  3.834057230613713*^9}, {3.8340575883622236`*^9, 3.8340575971979284`*^9}, {
+  3.8340581024205136`*^9, 3.834058105429082*^9}},
+ CellLabel->
+  "In[504]:=",ExpressionUUID->"c09a4ff5-1bdb-4769-baf9-130ed5e50393"],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{3.8340638287113867`*^9},
+ CellLabel->
+  "Out[507]=",ExpressionUUID->"018b87f5-6e5f-45d7-96d8-cc719bfaa2e9"]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 
+  3.834056912775744*^9}},ExpressionUUID->"f786fe2b-2bb4-436d-81f8-\
+a88b47a26135"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+looping from 5 to 25 in steps of 1 (nn),  5 repeats,  \
+RandomChoice[{.45,.35,.25 }->{Red, Yellow, Blue}]\
+\>", "Subsection",
+ CellChangeTimes->{{3.8340555154610796`*^9, 3.834055573749666*^9}, {
+  3.8340556052110996`*^9, 3.8340556239765177`*^9}, {3.8340558086262445`*^9, 
+  3.8340558089025493`*^9}, {3.8340559993081684`*^9, 3.834055999744624*^9}, {
+  3.834056804840271*^9, 3.8340568068582363`*^9}, {3.8340569666865816`*^9, 
+  3.8340569675801926`*^9}, {3.834057216203842*^9, 3.8340572185527177`*^9}, {
+  3.8340575983749776`*^9, 3.8340576003659325`*^9}, {3.83405796764896*^9, 
+  3.8340579683089895`*^9}, {3.834058320530125*^9, 3.8340583243020897`*^9}, {
+  3.8340584571430683`*^9, 
+  3.8340584770325203`*^9}},ExpressionUUID->"adcd6b46-a30a-4872-af4e-\
+109145e9731b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<Trial \>\"", ",", "nn"}], "]"}], "\[IndentingNewLine]", 
+        RowBox[{"ConsensusState", "[", 
+         RowBox[{"points_", ",", "colors_"}], "]"}]}], ":=", 
+       RowBox[{"NearestNeighborGraph", "[", 
+        RowBox[{"points", ",", "nn", ",", 
+         RowBox[{"DirectedEdges", "->", "True"}], ",", 
+         RowBox[{"DistanceFunction", "->", "EuclideanDistance"}], ",", 
+         RowBox[{"VertexStyle", "->", 
+          RowBox[{"MapThread", "[", 
+           RowBox[{"Rule", ",", 
+            RowBox[{"{", 
+             RowBox[{"points", ",", "colors"}], "}"}]}], "]"}]}], ",", 
+         RowBox[{"VertexSize", "->", "0.75"}], ",", 
+         RowBox[{"EdgeStyle", "->", "Black"}]}], "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"NodeDependencies", "[", "points_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"n", "->", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Position", "[", 
+                 RowBox[{"points", ",", "#"}], "]"}], "&"}], ",", 
+               RowBox[{"VertexOutComponent", "[", 
+                RowBox[{
+                 RowBox[{"NearestNeighborGraph", "[", 
+                  RowBox[{"points", ",", "nn", ",", 
+                   RowBox[{"DirectedEdges", "->", "True"}], ",", 
+                   RowBox[{"DistanceFunction", "->", "EuclideanDistance"}]}], 
+                  "]"}], ",", 
+                 RowBox[{"points", "[", 
+                  RowBox[{"[", "n", "]"}], "]"}], ",", 
+                 RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}], "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"n", ",", 
+             RowBox[{"Range", "[", 
+              RowBox[{"Length", "[", "points", "]"}], "]"}]}], "}"}]}], "]"}],
+          "\n", 
+         RowBox[{"SynchronousStepNewColors", "[", 
+          RowBox[{"dependencies_", ",", "colors_"}], "]"}]}], ":=", 
+        RowBox[{
+         RowBox[{"Flatten", "[", 
+          RowBox[{"Map", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"neighbors", "=", 
+                 RowBox[{"Sort", "[", 
+                  RowBox[{
+                   RowBox[{"Counts", "[", 
+                    RowBox[{"Part", "[", 
+                    RowBox[{"colors", ",", 
+                    RowBox[{"Last", "[", "#", "]"}]}], "]"}], "]"}], ",", 
+                   "Greater"}], "]"}]}], "}"}], ",", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"DuplicateFreeQ", "[", 
+                  RowBox[{"Values", "[", "neighbors", "]"}], "]"}], ",", 
+                 RowBox[{"First", "[", 
+                  RowBox[{"Keys", "[", "neighbors", "]"}], "]"}], ",", 
+                 RowBox[{"colors", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"First", "[", "#", "]"}], "]"}], "]"}]}], "]"}]}], 
+              "]"}], "&"}], ",", "dependencies"}], "]"}], "]"}], "\n", 
+         RowBox[{"GraphicsGrid", "[", 
+          RowBox[{
+           RowBox[{"Partition", "[", 
+            RowBox[{
+             RowBox[{"BlockRandom", "[", 
+              RowBox[{
+               RowBox[{"SeedRandom", "[", "100", "]"}], ";", 
+               RowBox[{"Module", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"pts", "=", 
+                    RowBox[{
+                    RowBox[{"RandomPointConfiguration", "[", 
+                    RowBox[{
+                    RowBox[{"HardcorePointProcess", "[", 
+                    RowBox[{"0.09", ",", "2", ",", "2"}], "]"}], ",", 
+                    RowBox[{"Rectangle", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"50", ",", "50"}], "}"}]}], "]"}]}], "]"}], "[", 
+                    "\"\<Points\>\"", "]"}]}], ",", "clrslist", ",", 
+                   "highlights"}], "}"}], ",", 
+                 RowBox[{
+                  RowBox[{"clrslist", "=", 
+                   RowBox[{"NestList", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"SynchronousStepNewColors", "[", 
+                    RowBox[{
+                    RowBox[{"NodeDependencies", "[", "pts", "]"}], ",", "#"}],
+                     "]"}], "&"}], ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"RandomChoice", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{".45", ",", ".35", ",", ".25"}], " ", "}"}], "->", 
+                    RowBox[{"{", 
+                    RowBox[{"Red", ",", " ", "Yellow", ",", " ", "Blue"}], 
+                    "}"}]}], "]"}], ",", 
+                    RowBox[{"Length", "[", "pts", "]"}]}], "]"}], ",", "10"}],
+                     "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"MapIndexed", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"colors", "=", "#"}], "}"}], ",", 
+                    RowBox[{"Graph", "[", 
+                    RowBox[{
+                    RowBox[{"ConsensusState", "[", 
+                    RowBox[{"pts", ",", "colors"}], "]"}], ",", 
+                    RowBox[{"ImageSize", "->", "300"}]}], "]"}]}], "]"}], 
+                    "&"}], ",", "clrslist"}], "]"}]}]}], "]"}]}], "]"}], ",", 
+             "5"}], "]"}], ",", 
+           RowBox[{"ImageSize", "->", "1700"}]}], "]"}]}]}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"nn", ",", "5", ",", "25", ",", "1"}], "}"}]}], "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.833968386941974*^9, 3.8339683869430113`*^9}, {
+   3.834053245333056*^9, 3.8340532461342506`*^9}, {3.834053666108363*^9, 
+   3.8340536683124056`*^9}, {3.834053703508751*^9, 3.8340537416944404`*^9}, {
+   3.8340549579033923`*^9, 3.8340551157414465`*^9}, {3.834055146772589*^9, 
+   3.834055314288165*^9}, {3.83405540795011*^9, 3.8340554335109105`*^9}, {
+   3.8340555671358795`*^9, 3.8340555674626265`*^9}, {3.834055652417533*^9, 
+   3.8340556545145855`*^9}, {3.8340557030029387`*^9, 3.834055704036343*^9}, {
+   3.8340558114703217`*^9, 3.834055814078517*^9}, {3.8340560231009607`*^9, 
+   3.8340560310547132`*^9}, {3.834056366995119*^9, 3.8340563687878933`*^9}, {
+   3.8340564557530117`*^9, 3.834056479725687*^9}, {3.8340572207184887`*^9, 
+   3.834057230613713*^9}, {3.8340575883622236`*^9, 3.8340575971979284`*^9}, {
+   3.8340581024205136`*^9, 3.834058105429082*^9}, {3.83405832753078*^9, 
+   3.8340583279151497`*^9}, {3.834058489339107*^9, 3.8340585244049425`*^9}, {
+   3.834058632424256*^9, 3.8340586635318933`*^9}, {3.8340623937744412`*^9, 
+   3.834062469789014*^9}, {3.834062511129408*^9, 3.8340625659237514`*^9}, {
+   3.8340626071611133`*^9, 3.834062612740573*^9}, {3.8340626447090545`*^9, 
+   3.8340626521643105`*^9}, {3.834062684475696*^9, 3.834062702063014*^9}, {
+   3.834062735182169*^9, 3.834062787286527*^9}, {3.834062824283453*^9, 
+   3.8340628464582524`*^9}, 3.834062885353426*^9, {3.8340629456055307`*^9, 
+   3.8340629494991918`*^9}, {3.8340629855942535`*^9, 
+   3.8340629858123164`*^9}, {3.834063048025115*^9, 3.834063075874913*^9}, {
+   3.834063107441867*^9, 3.8340631082302446`*^9}, {3.834063375715145*^9, 
+   3.8340633850154448`*^9}, {3.834063666914032*^9, 3.834063668189002*^9}, 
+   3.834063716374208*^9, {3.834064031684997*^9, 3.834064046189064*^9}, {
+   3.834064106647749*^9, 3.834064118825042*^9}, {3.834064178884346*^9, 
+   3.8340642902505674`*^9}},
+ CellLabel->
+  "In[532]:=",ExpressionUUID->"23e71ebc-06d9-442a-9df6-832c03ea85b9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "5"}],
+  SequenceForm["Trial ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642914978027`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"781ccf72-e1df-43a2-9088-a426a1b3dec9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "MapThread", "mptd", 
+   "\"Object \\!\\(\\*RowBox[{\\\"points_\\\"}]\\) at position {2, \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\)} in \\!\\(\\*RowBox[{\\\"MapThread\\\", \\\"[\
+\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) has only \
+\\!\\(\\*RowBox[{\\\"0\\\"}]\\) of required \\!\\(\\*RowBox[{\\\"1\\\"}]\\) \
+dimensions.\"", 2, 532, 89, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642915027857`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"0f972415-ae9f-4c0d-b04c-58389b3f45db"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NearestNeighborGraph", "list", 
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"5\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\
+\[Rule]\\\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]\\).\"", 2, 532, 90, 
+   18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642915147533`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"3056d849-2813-4c5c-a87c-3ff96edcf1ad"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"Times\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Null\\\", \\\" \\\", \
+RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\\\", \
+\\\",\\\", \\\"5\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\[Rule]\\\
+\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]}]\\) is Protected.\"", 2, 
+   532, 91, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.834064291528408*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"42695eb0-8fe7-468d-9414-dfa9a634dbf6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["Trial ", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291543745*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"f78442e7-3f02-4bf9-9823-2610350e1413"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "MapThread", "mptd", 
+   "\"Object \\!\\(\\*RowBox[{\\\"points_\\\"}]\\) at position {2, \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\)} in \\!\\(\\*RowBox[{\\\"MapThread\\\", \\\"[\
+\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) has only \
+\\!\\(\\*RowBox[{\\\"0\\\"}]\\) of required \\!\\(\\*RowBox[{\\\"1\\\"}]\\) \
+dimensions.\"", 2, 532, 92, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642915477304`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"85f93caf-21b8-4854-8d82-a25b3b007bfd"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NearestNeighborGraph", "list", 
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"6\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\
+\[Rule]\\\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]\\).\"", 2, 532, 93, 
+   18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642915547123`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"4f453658-fcb6-4fde-aa77-c004d4bd91ef"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"Times\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Null\\\", \\\" \\\", \
+RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\\\", \
+\\\",\\\", \\\"6\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\[Rule]\\\
+\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]}]\\) is Protected.\"", 2, 
+   532, 94, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.83406429156668*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"67ce875a-299d-47cf-94a7-b84cd12dc9da"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "7"}],
+  SequenceForm["Trial ", 7],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642915786514`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"243af4a9-291e-4ddd-996a-6a54d6fe80bc"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "MapThread", "mptd", 
+   "\"Object \\!\\(\\*RowBox[{\\\"points_\\\"}]\\) at position {2, \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\)} in \\!\\(\\*RowBox[{\\\"MapThread\\\", \\\"[\
+\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) has only \
+\\!\\(\\*RowBox[{\\\"0\\\"}]\\) of required \\!\\(\\*RowBox[{\\\"1\\\"}]\\) \
+dimensions.\"", 2, 532, 95, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642915816436`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"3e1539e5-ee7b-408e-9510-ad716620865c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"MapThread\\\", \\\"::\\\
+\", \\\"mptd\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"", 2, 532, 96, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.834064291589587*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"bed22714-1a2d-403e-8f18-75701d2bb561"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NearestNeighborGraph", "list", 
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\
+\\\", \\\",\\\", \\\"7\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\
+\[Rule]\\\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]\\).\"", 2, 532, 97, 
+   18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.834064291597601*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"0e67aef0-100e-4a09-974c-d59aad4b690b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \
+\\!\\(\\*StyleBox[RowBox[{\\\"NearestNeighborGraph\\\", \\\"::\\\", \
+\\\"list\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"", 2, 532, 98, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.8340642916095695`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"5c24c967-ad08-45bb-bb7c-042fae4a3bb3"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SetDelayed", "write", 
+   "\"Tag \\!\\(\\*RowBox[{\\\"Times\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Null\\\", \\\" \\\", \
+RowBox[{\\\"NearestNeighborGraph\\\", \\\"[\\\", RowBox[{\\\"points_\\\", \
+\\\",\\\", \\\"7\\\", \\\",\\\", RowBox[{\\\"DirectedEdges\\\", \\\"\[Rule]\\\
+\", \\\"True\\\"}], \\\",\\\", RowBox[{\\\"DistanceFunction\\\", \
+\\\"\[Rule]\\\", \\\"EuclideanDistance\\\"}], \\\",\\\", \
+RowBox[{\\\"VertexStyle\\\", \\\"\[Rule]\\\", RowBox[{\\\"MapThread\\\", \
+\\\"[\\\", RowBox[{\\\"Rule\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"points_\\\", \\\",\\\", \\\"colors_\\\"}], \\\"}\\\"}]}], \\\"]\\\
+\"}]}], \\\",\\\", RowBox[{\\\"VertexSize\\\", \\\"\[Rule]\\\", \
+\\\"0.75`\\\"}], \\\",\\\", RowBox[{\\\"EdgeStyle\\\", \\\"\[Rule]\\\", \
+InterpretationBox[ButtonBox[TooltipBox[GraphicsBox[List[List[GrayLevel[0], \
+RectangleBox[List[0, 0]]], List[GrayLevel[0], RectangleBox[List[1, -1]]], \
+List[GrayLevel[0], RectangleBox[List[0, -1], List[2, 1]]]], \
+Rule[DefaultBaseStyle, \\\"ColorSwatchGraphics\\\"], Rule[AspectRatio, 1], \
+Rule[Frame, True], Rule[FrameStyle, GrayLevel[0.`]], Rule[FrameTicks, None], \
+Rule[PlotRangePadding, None], Rule[ImageSize, Dynamic[List[Automatic, \
+Times[1.35`, Times[CurrentValue[\\\"FontCapHeight\\\"], \
+Power[AbsoluteCurrentValue[Magnification], -1]]]]]]], StyleBox[RowBox[List[\\\
+\"GrayLevel\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"]], Rule[NumberMarks, \
+False]]], Rule[Appearance, None], Rule[BaseStyle, List[]], \
+Rule[BaselinePosition, Baseline], Rule[DefaultBaseStyle, List[]], \
+RuleDelayed[ButtonFunction, With[List[Set[Typeset`box$, EvaluationBox[]]], \
+If[Not[AbsoluteCurrentValue[\\\"Deployed\\\"]], \
+CompoundExpression[SelectionMove[Typeset`box$, All, Expression], \
+Set[FrontEnd`Private`$ColorSelectorInitialAlpha, 1], \
+Set[FrontEnd`Private`$ColorSelectorInitialColor, GrayLevel[0]], \
+Set[FrontEnd`Private`$ColorSelectorUseMakeBoxes, True], \
+MathLink`CallFrontEnd[FrontEnd`AttachCell[Typeset`box$, \
+FrontEndResource[\\\"GrayLevelColorValueSelector\\\"], List[0, List[Left, \
+Bottom]], List[Left, Top], Rule[\\\"ClosingActions\\\", \
+List[\\\"SelectionDeparture\\\", \\\"ParentChanged\\\", \
+\\\"EvaluatorQuit\\\"]]]]]]]], Rule[BaseStyle, Inherited], Rule[Evaluator, \
+Automatic], Rule[Method, \\\"Preemptive\\\"]], GrayLevel[0], Rule[Editable, \
+False], Rule[Selectable, False]]}]}], \\\"]\\\"}]}]\\) is Protected.\"", 2, 
+   532, 99, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.834064291616515*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"683baae5-f1ec-4c6c-b5a9-e93e41393fbb"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"SetDelayed\\\", \
+\\\"::\\\", \\\"write\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 532, 100, 18668407798094674590, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8340642570062594`*^9, 3.834064291628928*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"b38c46ef-0c23-4d53-952d-4e335809b40f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "8"}],
+  SequenceForm["Trial ", 8],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916359043`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"9e8d489f-9fab-4090-ac7f-a0c64d4ef93f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["Trial ", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291639901*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"b53e7b35-d233-4d0b-9cc2-3dc155db5a46"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "10"}],
+  SequenceForm["Trial ", 10],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291644886*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"a5270696-41e4-48bf-914c-3603541e2f3c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "11"}],
+  SequenceForm["Trial ", 11],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291646885*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"930e23ab-6096-4dae-a9ca-ee89d69df682"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["Trial ", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291649865*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"aa3245ac-f884-48e4-9429-bcb88619cbaf"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "13"}],
+  SequenceForm["Trial ", 13],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916537333`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"c2adfa90-8a35-4da3-8424-bdcc9150af2c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "14"}],
+  SequenceForm["Trial ", 14],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291656723*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"63e76ffa-1480-4a2d-bbc9-c39b04ea618d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "15"}],
+  SequenceForm["Trial ", 15],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916597233`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"44e208fb-dc66-43fd-8c3c-19dc4d17e58b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "16"}],
+  SequenceForm["Trial ", 16],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.83406429166173*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"717ad250-1f6c-43e3-a538-e0824e9dbec7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "17"}],
+  SequenceForm["Trial ", 17],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916647015`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"650b41c2-e48f-4c7a-926a-738417640e10"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "18"}],
+  SequenceForm["Trial ", 18],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291666707*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"0c080575-a707-49d7-936f-48938be01e10"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "19"}],
+  SequenceForm["Trial ", 19],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916696873`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"64e7dc05-2185-4797-9108-bfbe6ede430c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "20"}],
+  SequenceForm["Trial ", 20],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291672681*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"49eef6c1-2188-405b-95a1-7aa6352ae696"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "21"}],
+  SequenceForm["Trial ", 21],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916746745`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"0b83008a-1818-4401-8955-afcb70de9792"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "22"}],
+  SequenceForm["Trial ", 22],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916776667`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"7df9d243-c8a6-4b44-9df5-d748208a27c1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "23"}],
+  SequenceForm["Trial ", 23],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.834064291680659*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"d9812dbf-d9a4-41e6-8a6e-c6e039bb587f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "24"}],
+  SequenceForm["Trial ", 24],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916826534`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"7dd46494-166a-4516-936c-2aa9e7a7d0e0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Trial \"\>", "\[InvisibleSpace]", "25"}],
+  SequenceForm["Trial ", 25],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8340642569982815`*^9, 3.8340642916866426`*^9},
+ CellLabel->
+  "During evaluation of \
+In[532]:=",ExpressionUUID->"2f8bbf42-7579-4142-9f61-8255f2bbb613"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.834056894912504*^9, 3.834056912775744*^9}},
+ CellLabel->
+  "In[512]:=",ExpressionUUID->"de447017-b0ff-474c-b629-347a7815f3b3"]
+}, Open  ]]
 },
-WindowSize->{571.8, 509.4},
-WindowMargins->{{284.4, Automatic}, {18, Automatic}},
+WindowSize->{1152., 585.6},
+WindowMargins->{{
+  Automatic, -5.399999999999864}, {-5.399999999999977, Automatic}},
+Magnification:>0.75 Inherited,
 FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (May 11, 2021)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"09bfa554-bf71-42cd-b1d5-358f5db20d6d"
@@ -36,9 +2589,107 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 338, 5, 50, "Section",ExpressionUUID->"1fb7b059-a13e-4571-a023-c8c0b32dd6a8",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}],
+Cell[921, 29, 322, 8, 46, "Text",ExpressionUUID->"c3342333-8e0e-43cc-9e40-afbaf6463fa8",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1280, 42, 579, 12, 62, "Subsubsection",ExpressionUUID->"da8584a6-2b66-45bb-bd29-bb81142e2b47",
+ CellGroupingRules->{"GroupTogetherGrouping", 10001.}],
+Cell[1862, 56, 500, 11, 78, "Section",ExpressionUUID->"12101d61-4f1e-4a6c-9c37-6eec87bee037",
+ CellGroupingRules->{"GroupTogetherGrouping", 10001.}]
+}, Open  ]],
+Cell[2377, 70, 4061, 97, 140, "Input",ExpressionUUID->"3345c971-e664-41fe-8944-9bf11398314f"],
+Cell[6441, 169, 10971, 201, 278, "Input",ExpressionUUID->"a568d5c5-9575-431a-a244-3bd40e912b34"],
+Cell[17415, 372, 469, 10, 65, "Text",ExpressionUUID->"eaca412b-385a-44bd-931d-46dceb49ac20"],
+Cell[17887, 384, 3146, 74, 170, "Input",ExpressionUUID->"468638aa-6ad0-4487-9e8f-1c2e5b824949"],
+Cell[21036, 460, 590, 13, 84, "Text",ExpressionUUID->"2d3970f1-594b-4700-bc12-0d2e74031bf6"],
+Cell[CellGroupData[{
+Cell[21651, 477, 478, 10, 60, "Subsection",ExpressionUUID->"2f8fdca0-93e8-4482-92ea-7391145e4193"],
+Cell[22132, 489, 5734, 143, 112, "Input",ExpressionUUID->"58d587a9-cd99-4dcf-8585-efe5a2e02c82"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27903, 637, 412, 9, 60, "Subsection",ExpressionUUID->"9b58878e-92a8-4267-a7dc-1f9fd4306af6"],
+Cell[28318, 648, 5734, 143, 112, "Input",ExpressionUUID->"21f0c351-0d77-4706-ae0f-f56d1a2f3421"],
+Cell[34055, 793, 170, 3, 36, "Input",ExpressionUUID->"137b3581-2351-4e61-a7f0-0d6328629cfd"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34262, 801, 514, 10, 60, "Subsection",ExpressionUUID->"678a15d8-9e18-48f9-b61e-daa9c6484e29"],
+Cell[34779, 813, 5837, 144, 112, "Input",ExpressionUUID->"2e2c5865-8b6c-4f49-b615-4fd86d544f3b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40653, 962, 569, 11, 60, "Subsection",ExpressionUUID->"842e3260-aa7b-4f65-bc25-5708bdb43d73"],
+Cell[41225, 975, 5837, 144, 112, "Input",ExpressionUUID->"2e39391f-c61d-492b-b4a4-273ed5a1167a"],
+Cell[47065, 1121, 171, 3, 36, "Input",ExpressionUUID->"8a384665-232d-41a4-a24f-8a48aa70328c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47273, 1129, 667, 12, 60, "Subsection",ExpressionUUID->"829ec2db-9f7d-4bff-8055-b52963bebf21"],
+Cell[47943, 1143, 5890, 145, 112, "Input",ExpressionUUID->"d0ca8c19-c2dd-4c57-96a6-1dc37d8c5bf4"],
+Cell[53836, 1290, 171, 3, 36, "Input",ExpressionUUID->"00dc83f2-b3e0-4315-a208-c972d8a89a07"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54044, 1298, 618, 12, 60, "Subsection",ExpressionUUID->"dd5f5d35-a4cf-47fc-9b9b-6f8861f001d2"],
+Cell[54665, 1312, 5888, 145, 181, "Input",ExpressionUUID->"74dc958b-1429-4026-baf8-0cda0f0cc311"],
+Cell[60556, 1459, 171, 3, 36, "Input",ExpressionUUID->"6932782b-48c8-4a40-8ba9-034b9b31e1b3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60764, 1467, 664, 12, 61, "Subsection",ExpressionUUID->"248f875b-f509-472e-bcdc-4bae922b9f3b"],
+Cell[61431, 1481, 5934, 145, 181, "Input",ExpressionUUID->"f6bc0c36-afa0-4b5f-bc95-dbe54348bd53"],
+Cell[67368, 1628, 171, 3, 36, "Input",ExpressionUUID->"7c30d923-93a3-44d2-8aaa-643b725f0538"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67576, 1636, 658, 12, 61, "Subsection",ExpressionUUID->"7354dc23-777d-4118-80cc-8825ddb86ba5"],
+Cell[CellGroupData[{
+Cell[68259, 1652, 5989, 146, 181, "Input",ExpressionUUID->"c09a4ff5-1bdb-4769-baf9-130ed5e50393"],
+Cell[74251, 1800, 162, 3, 24, "Output",ExpressionUUID->"018b87f5-6e5f-45d7-96d8-cc719bfaa2e9"]
+}, Open  ]],
+Cell[74428, 1806, 171, 3, 36, "Input",ExpressionUUID->"f786fe2b-2bb4-436d-81f8-a88b47a26135"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74636, 1814, 774, 14, 61, "Subsection",ExpressionUUID->"adcd6b46-a30a-4872-af4e-109145e9731b"],
+Cell[CellGroupData[{
+Cell[75435, 1832, 8049, 169, 209, "Input",ExpressionUUID->"23e71ebc-06d9-442a-9df6-832c03ea85b9"],
+Cell[83487, 2003, 322, 8, 18, "Print",ExpressionUUID->"781ccf72-e1df-43a2-9088-a426a1b3dec9"],
+Cell[83812, 2013, 709, 13, 22, "Message",ExpressionUUID->"0f972415-ae9f-4c0d-b04c-58389b3f45db"],
+Cell[84524, 2028, 2661, 42, 22, "Message",ExpressionUUID->"3056d849-2813-4c5c-a87c-3ff96edcf1ad"],
+Cell[87188, 2072, 2682, 43, 22, "Message",ExpressionUUID->"42695eb0-8fe7-468d-9414-dfa9a634dbf6"],
+Cell[89873, 2117, 320, 8, 18, "Print",ExpressionUUID->"f78442e7-3f02-4bf9-9823-2610350e1413"],
+Cell[90196, 2127, 709, 13, 22, "Message",ExpressionUUID->"85f93caf-21b8-4854-8d82-a25b3b007bfd"],
+Cell[90908, 2142, 2661, 42, 22, "Message",ExpressionUUID->"4f453658-fcb6-4fde-aa77-c004d4bd91ef"],
+Cell[93572, 2186, 2681, 43, 22, "Message",ExpressionUUID->"67ce875a-299d-47cf-94a7-b84cd12dc9da"],
+Cell[96256, 2231, 322, 8, 18, "Print",ExpressionUUID->"243af4a9-291e-4ddd-996a-6a54d6fe80bc"],
+Cell[96581, 2241, 709, 13, 22, "Message",ExpressionUUID->"3e1539e5-ee7b-408e-9510-ad716620865c"],
+Cell[97293, 2256, 480, 10, 22, "Message",ExpressionUUID->"bed22714-1a2d-403e-8f18-75701d2bb561"],
+Cell[97776, 2268, 2659, 42, 22, "Message",ExpressionUUID->"0e67aef0-100e-4a09-974c-d59aad4b690b"],
+Cell[100438, 2312, 495, 11, 22, "Message",ExpressionUUID->"5c24c967-ad08-45bb-bb7c-042fae4a3bb3"],
+Cell[100936, 2325, 2682, 43, 22, "Message",ExpressionUUID->"683baae5-f1ec-4c6c-b5a9-e93e41393fbb"],
+Cell[103621, 2370, 483, 10, 22, "Message",ExpressionUUID->"b38c46ef-0c23-4d53-952d-4e335809b40f"],
+Cell[CellGroupData[{
+Cell[104129, 2384, 322, 8, 18, "Print",ExpressionUUID->"9e8d489f-9fab-4090-ac7f-a0c64d4ef93f"],
+Cell[104454, 2394, 320, 8, 18, "Print",ExpressionUUID->"b53e7b35-d233-4d0b-9cc2-3dc155db5a46"],
+Cell[104777, 2404, 322, 8, 18, "Print",ExpressionUUID->"a5270696-41e4-48bf-914c-3603541e2f3c"],
+Cell[105102, 2414, 322, 8, 18, "Print",ExpressionUUID->"930e23ab-6096-4dae-a9ca-ee89d69df682"],
+Cell[105427, 2424, 322, 8, 18, "Print",ExpressionUUID->"aa3245ac-f884-48e4-9429-bcb88619cbaf"],
+Cell[105752, 2434, 324, 8, 18, "Print",ExpressionUUID->"c2adfa90-8a35-4da3-8424-bdcc9150af2c"],
+Cell[106079, 2444, 322, 8, 18, "Print",ExpressionUUID->"63e76ffa-1480-4a2d-bbc9-c39b04ea618d"],
+Cell[106404, 2454, 324, 8, 18, "Print",ExpressionUUID->"44e208fb-dc66-43fd-8c3c-19dc4d17e58b"],
+Cell[106731, 2464, 321, 8, 18, "Print",ExpressionUUID->"717ad250-1f6c-43e3-a538-e0824e9dbec7"],
+Cell[107055, 2474, 324, 8, 18, "Print",ExpressionUUID->"650b41c2-e48f-4c7a-926a-738417640e10"],
+Cell[107382, 2484, 322, 8, 18, "Print",ExpressionUUID->"0c080575-a707-49d7-936f-48938be01e10"],
+Cell[107707, 2494, 324, 8, 18, "Print",ExpressionUUID->"64e7dc05-2185-4797-9108-bfbe6ede430c"],
+Cell[108034, 2504, 322, 8, 18, "Print",ExpressionUUID->"49eef6c1-2188-405b-95a1-7aa6352ae696"],
+Cell[108359, 2514, 324, 8, 18, "Print",ExpressionUUID->"0b83008a-1818-4401-8955-afcb70de9792"],
+Cell[108686, 2524, 324, 8, 18, "Print",ExpressionUUID->"7df9d243-c8a6-4b44-9df5-d748208a27c1"],
+Cell[109013, 2534, 322, 8, 18, "Print",ExpressionUUID->"d9812dbf-d9a4-41e6-8a6e-c6e039bb587f"],
+Cell[109338, 2544, 324, 8, 18, "Print",ExpressionUUID->"7dd46494-166a-4516-936c-2aa9e7a7d0e0"],
+Cell[109665, 2554, 324, 8, 18, "Print",ExpressionUUID->"2f8bbf42-7579-4142-9f61-8255f2bbb613"]
+}, Open  ]]
+}, Open  ]],
+Cell[110016, 2566, 194, 3, 36, "Input",ExpressionUUID->"de447017-b0ff-474c-b629-347a7815f3b3"]
+}, Open  ]]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
