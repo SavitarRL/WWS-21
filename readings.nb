@@ -1,0 +1,902 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38239,        892]
+NotebookOptionsPosition[     32850,        814]
+NotebookOutlinePosition[     33254,        830]
+CellTagsIndexPosition[     33211,        827]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Wolfram Physics Summer School 2021 Recommended and Preferred \
+Reading/Listening List\
+\>", "Title",
+ CellFrame->{{0, 0}, {3, 0}},
+ CellChangeTimes->{{3.7300321021686196`*^9, 3.7300321073279157`*^9}, {
+   3.7322779028554163`*^9, 3.7322779076852703`*^9}, {3.732278497768716*^9, 
+   3.732278501574946*^9}, {3.735559507972823*^9, 3.735559509665742*^9}, {
+   3.739905802491063*^9, 3.739905810704968*^9}, {3.740225160160273*^9, 
+   3.740225163111187*^9}, 3.740230064310842*^9, 3.74030544134837*^9, {
+   3.742575799383541*^9, 3.742575803494772*^9}, {3.763402373827448*^9, 
+   3.763402374320541*^9}, {3.767009553479499*^9, 3.7670095620546017`*^9}, {
+   3.791204869064559*^9, 3.7912048692596836`*^9}, {3.813931107904006*^9, 
+   3.8139311177039847`*^9}, {3.814617083562252*^9, 3.8146170985245256`*^9}, {
+   3.817207890294777*^9, 3.817207903620639*^9}, {3.8327673451136703`*^9, 
+   3.832767346573312*^9}},ExpressionUUID->"8f7d71e5-8484-4ec9-b7f8-\
+6f29f7510e18"],
+
+Cell[CellGroupData[{
+
+Cell["Week Zero", "Subsection",
+ CellChangeTimes->{{3.730658118829225*^9, 3.730658121649406*^9}, {
+   3.730658228723864*^9, 3.730658231492269*^9}, {3.730680822514485*^9, 
+   3.7306808240641327`*^9}, {3.740230071318399*^9, 3.740230088563992*^9}, {
+   3.7425762474815483`*^9, 3.742576248103146*^9}, {3.74257637831219*^9, 
+   3.742576395853046*^9}, 3.7425774289236712`*^9, {3.7634024957722254`*^9, 
+   3.7634024989963903`*^9}, {3.7670096090969157`*^9, 3.7670096099046087`*^9}, 
+   3.767010175962287*^9, 3.767010524060193*^9, 3.767015209903925*^9, 
+   3.767015303392748*^9, {3.8139313003314223`*^9, 
+   3.8139313014797096`*^9}},ExpressionUUID->"648d0143-50fb-435b-9c0d-\
+114628fc1b45"],
+
+Cell[TextData[{
+ "(June 21-26, 2021): ",
+ StyleBox["Self Guided Reading",
+  FontWeight->"Bold"]
+}], "Subsubsection",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellChangeTimes->{{3.7634026988526154`*^9, 3.763402736629562*^9}, {
+   3.765809987986959*^9, 3.765809995362677*^9}, {3.767009643506034*^9, 
+   3.767009692798626*^9}, {3.767009777210022*^9, 3.7670097772101727`*^9}, {
+   3.767009840437232*^9, 3.7670098765921474`*^9}, 3.7670105240604773`*^9, {
+   3.767011928504726*^9, 3.767011932072517*^9}, 3.767015209904895*^9, 
+   3.7670153033930387`*^9, {3.767111087069109*^9, 3.7671110899897346`*^9}, 
+   3.770037296073967*^9, {3.7912021155288877`*^9, 3.7912021377685747`*^9}, {
+   3.7912021761107883`*^9, 3.7912021813701897`*^9}, {3.791202274513956*^9, 
+   3.7912022901482553`*^9}, {3.797951275005137*^9, 3.797951276822934*^9}, 
+   3.7979531850447397`*^9, {3.8032328621871*^9, 3.803232869147591*^9}, {
+   3.813931304378086*^9, 3.813931359440875*^9}, {3.813932123626957*^9, 
+   3.813932139492432*^9}, {3.814614893116942*^9, 3.8146148965927787`*^9}, {
+   3.832767447377346*^9, 
+   3.8327674518212113`*^9}},ExpressionUUID->"ec3ea6cb-6bbf-437a-90a2-\
+96f2fdb1ed45"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Recommended Reading / Tutorials / Repositories:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.8139315638829*^9, 3.813931565745203*^9}, {
+  3.8146149903213387`*^9, 3.8146150245912433`*^9}, {3.832853964337772*^9, 
+  3.8328539714895906`*^9}, {3.832854938526074*^9, 
+  3.832854946074974*^9}},ExpressionUUID->"e4b53f08-a24c-42b4-ba72-\
+0cfe52b42174"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["A Class of Models with the Potential to Represent Fundamental \
+Physics",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/technical-introduction/"], None},
+  ButtonNote->"https://www.wolframphysics.org/technical-introduction/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 
+  3.8327678006796517`*^9}},ExpressionUUID->"82e02fdf-511c-44d3-bc0d-\
+79d6079c2dd3"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Some Relativistic and Gravitational Properties of the Wolfram \
+Model",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.complex-systems.com/abstracts/v29_i02_a03/"], None},
+  ButtonNote->"https://www.complex-systems.com/abstracts/v29_i02_a03/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519121869358*^9}, {
+  3.8327678032995276`*^9, 
+  3.8327678048638873`*^9}},ExpressionUUID->"34e3befd-94f0-48f7-9536-\
+a301957e6821"],
+
+Cell[TextData[{
+ "JG, MN, XA: \[OpenCurlyDoubleQuote]",
+ ButtonBox["ZX-Calculus and Extended Hypergraph Rewriting Systems I: A \
+Multiway Approach to Categorical Quantum Information Theory",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/pdf/2010.02752.pdf"], None},
+  ButtonNote->"https://arxiv.org/pdf/2010.02752.pdf"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+   3.8327675599411917`*^9, 3.832767573322568*^9}, {3.832767807972472*^9, 
+   3.8327678082214413`*^9}, 3.8328539487839637`*^9, {3.832854665990003*^9, 
+   3.832854665990209*^9}},ExpressionUUID->"c9134b9f-2db9-4051-accc-\
+a8ba50f4540a"],
+
+Cell[TextData[{
+ "XA, JG, HE: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Homotopies in Multiway (Non-Deterministic) Rewriting Systems as \
+n-Fold Categories",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/pdf/2105.10822.pdf"], None},
+  ButtonNote->"https://arxiv.org/pdf/2105.10822.pdf"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+   3.8327675599411917`*^9, 3.832767573322568*^9}, {3.832767807972472*^9, 
+   3.8327678082214413`*^9}, 3.8328539487839637`*^9, 3.832854667553255*^9, {
+   3.832856080923346*^9, 
+   3.832856080923552*^9}},ExpressionUUID->"a5485a10-18c4-4e69-912b-\
+f53b52f13a08"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Algorithmic Causal Sets and the Wolfram Model",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/abs/2011.12174"], None},
+  ButtonNote->"https://arxiv.org/abs/2011.12174"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+   3.8327675599411917`*^9, 3.832767573322568*^9}, {3.832767807972472*^9, 
+   3.8327678082214413`*^9}, 3.8328539487839637`*^9, 3.832854667553255*^9, 
+   3.83285608259809*^9},ExpressionUUID->"716831b6-f3dc-472d-a9c4-\
+b17b067b9ce1"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["The Wolfram Physics Project: A One-Year Update",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2021/04/the-wolfram-physics-\
+project-a-one-year-update/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2021/04/the-wolfram-physics-project-a-\
+one-year-update/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+  3.832767560560616*^9, 3.8327676069238167`*^9}, {3.832767640386338*^9, 
+  3.832767640386688*^9}, {3.832767717485187*^9, 3.832767717485396*^9}, {
+  3.8327678114417543`*^9, 
+  3.8327678115984488`*^9}},ExpressionUUID->"0930b246-cb4d-4d89-8312-\
+f97817d9a6dd"],
+
+Cell[TextData[{
+ "Wolfram Physics Project: ",
+ ButtonBox["Function Repository Guide Page",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframcloud.com/obj/wolframphysics/Tools/guide-page"], 
+    None},
+  ButtonNote->
+   "https://www.wolframcloud.com/obj/wolframphysics/Tools/guide-page"]
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 
+  3.816519280415976*^9}},ExpressionUUID->"8fd50211-c878-4b9f-ad80-\
+b70a56f8249b"],
+
+Cell[TextData[{
+ "Wolfram Physics Project: ",
+ ButtonBox["Hands-On Introduction",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframcloud.com/obj/wolframphysics/Tools/hands-on-\
+introduction-to-the-wolfram-physics-project.nb"], None},
+  ButtonNote->
+   "https://www.wolframcloud.com/obj/wolframphysics/Tools/hands-on-\
+introduction-to-the-wolfram-physics-project.nb"]
+}], "Subitem",
+ CellChangeTimes->{{3.816519289053644*^9, 
+  3.816519307318541*^9}},ExpressionUUID->"805d97ea-46f6-43e4-9d8b-\
+dff9eb1b7d91"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Matt Kafker: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Exploring Networks in Hard Sphere Models",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://community.wolfram.com/groups/-/m/t/2028871"], None},
+  ButtonNote->"https://community.wolfram.com/groups/-/m/t/2028871"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165197918397827`*^9, 3.816519839220394*^9}, {
+  3.832790613781395*^9, 3.832790632143314*^9}, {3.8327907631797533`*^9, 
+  3.832790784714706*^9}},ExpressionUUID->"465e33ca-fdac-43f5-96c9-\
+59d5c94bcb93"],
+
+Cell[TextData[{
+ "WFR \[OpenCurlyDoubleQuote]",
+ ButtonBox["HardSphereSimulation",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+HardSphereSimulation/"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/\
+HardSphereSimulation/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subsubitem",
+ CellChangeTimes->{{3.8327908024453554`*^9, 
+  3.832790826042101*^9}},ExpressionUUID->"7ca24e9b-f5b7-4a43-8aeb-\
+9be94ddb46a2"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Wolfram Physics Project: ",
+ ButtonBox["Technical Documents",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/technical-documents/"], None},
+  ButtonNote->"https://www.wolframphysics.org/technical-documents/"]
+}], "Subitem",
+ CellChangeTimes->{
+  3.816519441455982*^9, {3.816519673903861*^9, 
+   3.8165196939525023`*^9}},ExpressionUUID->"a0d64b31-bfd1-45cc-9a5d-\
+790f5a2b5d9a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Recommended Video Lectures:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.8139315638829*^9, 3.813931565745203*^9}, {
+  3.8146149903213387`*^9, 3.814615038092492*^9}, {3.816519321531446*^9, 
+  3.81651932911335*^9}, {3.8327679949784417`*^9, 3.832767994979034*^9}, {
+  3.832787614117392*^9, 
+  3.832787621914892*^9}},ExpressionUUID->"8ed95db7-cd59-4996-be8e-\
+893ec258ee1a"],
+
+Cell[TextData[{
+ "SW:",
+ ButtonBox[" \[OpenCurlyDoubleQuote]School Kickoff Keynote\
+\[CloseCurlyDoubleQuote]  ",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://youtu.be/g_JiSagSqNc"], None},
+  ButtonNote->"https://youtu.be/g_JiSagSqNc"]
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+   3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+   3.8327876644797597`*^9}, {3.8327897361305833`*^9, 3.8327897815318346`*^9}, 
+   3.832790513744116*^9},ExpressionUUID->"5425bf00-3c56-4fe7-a066-\
+e2ae502fd8e6"],
+
+Cell[TextData[{
+ "JG: \"",
+ ButtonBox["Wolfram Physics I: Basic Formalism, Causal Invariance and Special \
+Relativity",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=BV3a0PzNNqE"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=BV3a0PzNNqE"],
+ "\""
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+  3.8327876644797597`*^9}},ExpressionUUID->"9ddb7561-7c3a-4656-abfa-\
+6aec79f0df58"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Wolfram Physics II: Emergent Hypergraph Geometry and General \
+Relativity",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=I58UxWcgp_4"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=I58UxWcgp_4"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+  3.8327877185172567`*^9}},ExpressionUUID->"c2b94b6a-1ec2-4e54-8087-\
+7c5b2046badd"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Wolfram Physics III: Completion Procedures and Basic Quantum \
+Mechanics",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=NupBxcmAwYs&t=265s"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=NupBxcmAwYs&t=265s"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+  3.8327877307489667`*^9}, {3.8327898119802623`*^9, 3.8327898119809217`*^9}, {
+  3.8327900523180647`*^9, 
+  3.832790052318275*^9}},ExpressionUUID->"8bc51a0f-8787-4d8a-99e3-\
+8ab36d87dd7a"],
+
+Cell[TextData[{
+ "MP: \[OpenCurlyDoubleQuote]Physics Tools I: ",
+ ButtonBox["WolframModel/SetReplace and Related Functions",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=hgmUH0bcyVM&t=11s"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=hgmUH0bcyVM&t=11s"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+  3.8327877307489667`*^9}, {3.8327898119802623`*^9, 3.8327898119809217`*^9}, {
+  3.8327900530195932`*^9, 
+  3.832790083136423*^9}},ExpressionUUID->"56fc4462-5a35-41b1-8aad-\
+cbf2edf64ea5"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]Physics Tools II :  ",
+ ButtonBox["MultiwaySystem and Related Functions",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=p7xtT3Ge1TE&t=444s"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=p7xtT3Ge1TE&t=444s"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.816519090412938*^9}, {
+  3.832767800517405*^9, 3.8327678006796517`*^9}, {3.8327876441266284`*^9, 
+  3.8327877307489667`*^9}, {3.832789812364999*^9, 3.8327898171560593`*^9}, {
+  3.832789852941577*^9, 3.8327898529421496`*^9}, {3.832790022299775*^9, 
+  3.8327900378629923`*^9}, {3.832790092127576*^9, 
+  3.832790092991263*^9}},ExpressionUUID->"de0f4370-6b1e-4dac-b2c8-\
+f0ed97586fc9"],
+
+Cell[TextData[ButtonBox["WolframModel Documentation",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+WolframModel"], None},
+ ButtonNote->
+  "https://resources.wolframcloud.com/FunctionRepository/resources/\
+WolframModel"]], "Subsubitem",
+ CellChangeTimes->{{3.8327898906781797`*^9, 
+  3.832789891127494*^9}},ExpressionUUID->"fc604e92-924e-4e12-a825-\
+38138488b939"],
+
+Cell[TextData[ButtonBox["MultiwaySystem Documentation",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+MultiwaySystem"], None},
+ ButtonNote->
+  "https://resources.wolframcloud.com/FunctionRepository/resources/\
+MultiwaySystem"]], "Subsubitem",
+ CellChangeTimes->{{3.8327898906781797`*^9, 
+  3.8327898965946207`*^9}},ExpressionUUID->"75e08320-97b8-48b6-b402-\
+ecb08ce8388f"],
+
+Cell[TextData[ButtonBox["Tools Tutorial",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://www.wolframcloud.com/obj/wolframphysics/Tools/hands-on-\
+introduction-to-the-wolfram-physics-project.nb"], None},
+ ButtonNote->
+  "https://www.wolframcloud.com/obj/wolframphysics/Tools/hands-on-\
+introduction-to-the-wolfram-physics-project.nb"]], "Subsubitem",
+ CellChangeTimes->{{3.8327898906781797`*^9, 
+  3.832789901747654*^9}},ExpressionUUID->"c0a1637a-f53f-4085-ae15-\
+72fc3667ec60"]
+}, Open  ]],
+
+Cell[TextData[{
+ "MP: \[OpenCurlyDoubleQuote]",
+ ButtonBox["SetReplace and Wolfram Physics Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolfram.com/broadcast/video.php?c=488&p=2&v=3237"], None},
+  ButtonNote->"https://www.wolfram.com/broadcast/video.php?c=488&p=2&v=3237"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.832790289663328*^9, 3.83279029192507*^9}, {
+  3.832790323696516*^9, 3.8327903285749073`*^9}, {3.8327904911343336`*^9, 
+  3.8327904911399703`*^9}},ExpressionUUID->"c3ef54db-c970-4ce7-8812-\
+64cfc9548a9c"],
+
+Cell[TextData[{
+ "XA: \[OpenCurlyDoubleQuote]Wolfram Physics V :  ",
+ ButtonBox["Foundations of the Wolfram Model in Homotopy Type Theory",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://amoeba.wolfram.com/index.php/s/yys3zJcXyJRQG6Y"], None},
+  ButtonNote->"https://amoeba.wolfram.com/index.php/s/yys3zJcXyJRQG6Y"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.832790002657776*^9, 
+  3.832790019209222*^9}},ExpressionUUID->"2fdccd1a-570c-468b-bae3-\
+9260f0427f3d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Additional Reading / Listening:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.8139315638829*^9, 3.813931565745203*^9}, {
+  3.8146149903213387`*^9, 3.814615038092492*^9}, {3.816519321531446*^9, 
+  3.81651932911335*^9}, {3.8327679949784417`*^9, 3.832767994979034*^9}, {
+  3.8328540422531643`*^9, 
+  3.832854051393132*^9}},ExpressionUUID->"74128193-eaca-4bd3-982e-\
+101420d794e5"],
+
+Cell[TextData[{
+ "JG, MN, XA: \[OpenCurlyDoubleQuote]",
+ ButtonBox["ZX-Calculus and Extended Wolfram Model Systems II: Fast \
+Diagrammatic Reasoning with an Application to Quantum Circuit",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/pdf/2103.15820.pdf"], None},
+  ButtonNote->"https://arxiv.org/pdf/2103.15820.pdf"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+  3.832767560560616*^9, 3.8327676069238167`*^9}, {3.8327676409518557`*^9, 
+  3.832767670764596*^9}, {3.832854697715827*^9, 3.832854697716061*^9}, {
+  3.832855658648547*^9, 
+  3.8328556586487694`*^9}},ExpressionUUID->"b06146f7-d442-4d80-9cb1-\
+54386bd04da0"],
+
+Cell[TextData[{
+ "JG, MN, XA: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Fast Automated Reasoning over String Diagrams using Multiway \
+Causal Structure",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/pdf/2105.04057.pdf"], None},
+  ButtonNote->"https://arxiv.org/pdf/2105.04057.pdf"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165190606838207`*^9, 3.8165191979105477`*^9}, {
+   3.832767560560616*^9, 3.8327676069238167`*^9}, {3.8327676409518557`*^9, 
+   3.832767670764596*^9}, {3.832854697715827*^9, 3.832854697716061*^9}, 
+   3.832855660762163*^9, {3.832855731587577*^9, 
+   3.832855731589046*^9}},ExpressionUUID->"1d15eccc-d952-4055-b97c-\
+e2e23cda8376"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Hypergraph Discretization of the Cauchy Problem in General \
+Relativity via Wolfram Model Evolution",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/pdf/2102.09363.pdf"], None},
+  ButtonNote->"https://arxiv.org/pdf/2102.09363.pdf"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165194169758387`*^9, 3.816519437858136*^9}, {
+  3.8327680250858502`*^9, 3.83276802531665*^9}, {3.832768516473796*^9, 
+  3.832768529131358*^9}, {3.8328548376782*^9, 
+  3.832854837678442*^9}},ExpressionUUID->"34a970ee-f18e-4b66-a77b-\
+6778c06f53b0"],
+
+Cell[TextData[{
+ "XA: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Homotopic Foundations of Wolfram Models\[CloseCurlyDoubleQuote]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://community.wolfram.com/groups/-/m/t/2032113"], None},
+  ButtonNote->"https://community.wolfram.com/groups/-/m/t/2032113"]
+}], "Subitem",
+ CellChangeTimes->{{3.8165194169758387`*^9, 3.816519437858136*^9}, {
+   3.8327680250858502`*^9, 3.83276802531665*^9}, {3.832768516473796*^9, 
+   3.832768529131358*^9}, 
+   3.8328548392406*^9},ExpressionUUID->"cfe43ded-e0bd-4735-a521-ad7339ffbd19"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["A Candidate Geometrical Formalism for the Foundations of \
+Mathematics and Physics",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/bulletins/2020/08/a-candidate-\
+geometrical-formalism-for-the-foundations-of-mathematics-and-physics/"], None},
+  ButtonNote->
+   "https://www.wolframphysics.org/bulletins/2020/08/a-candidate-geometrical-\
+formalism-for-the-foundations-of-mathematics-and-physics/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.816519441455982*^9, 3.8165194670744963`*^9}, {
+  3.832768030411944*^9, 
+  3.832768030608685*^9}},ExpressionUUID->"c7d5fa88-2478-4cce-86e5-\
+60af935cdd95"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Exploring Rulial Space: The Case of Turing Machines",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/bulletins/page/3/"], None},
+  ButtonNote->"https://www.wolframphysics.org/bulletins/page/3/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.832768196619685*^9}, {3.832768616331883*^9, 
+  3.832768639686579*^9}},ExpressionUUID->"36daed92-eeac-439b-a3da-\
+fe39d13f08c7"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Event Horizons, Singularities and Other Exotic Spacetime \
+Phenomena",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/bulletins/2020/05/event-horizons-\
+singularities-and-other-exotic-spacetime-phenomena/"], None},
+  ButtonNote->
+   "https://www.wolframphysics.org/bulletins/2020/05/event-horizons-\
+singularities-and-other-exotic-spacetime-phenomena/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165193403893623`*^9, 3.8165193571166363`*^9}, {
+  3.832767997818224*^9, 3.8327679990360603`*^9}, {3.832768056860714*^9, 
+  3.832768057869083*^9}},ExpressionUUID->"0a0d527c-a387-44ff-96a4-\
+6edb409579f4"],
+
+Cell[TextData[{
+ "SW: \"",
+ ButtonBox["Faster than Light in Our Model of Physics: Some Preliminary \
+Thoughts",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2020/10/faster-than-light-in-our-\
+model-of-physics-some-preliminary-thoughts/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2020/10/faster-than-light-in-our-\
+model-of-physics-some-preliminary-thoughts/"],
+ "\""
+}], "Subitem",
+ CellChangeTimes->{{3.8165193403893623`*^9, 3.8165193571166363`*^9}, {
+  3.832768022341989*^9, 
+  3.832768022513465*^9}},ExpressionUUID->"57257081-934f-49b3-9bb7-\
+354bc040713f"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["The Empirical Metamathematics of Euclid and Beyond",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2020/09/the-empirical-\
+metamathematics-of-euclid-and-beyond/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2020/09/the-empirical-metamathematics-\
+of-euclid-and-beyond/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.832768283711068*^9, 
+  3.832768283711321*^9}},ExpressionUUID->"fc7c934e-dc76-49bd-ac39-\
+ccc5823983c0"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Science beyond the Horizon: Stephen Wolfram on a Fundamental \
+Theory of Physics",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=Ir41H6kLKaw"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=Ir41H6kLKaw"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563573568087`*^9, 
+  3.832856357357086*^9}},ExpressionUUID->"fdab4d0d-9dc5-41a9-8535-\
+01ad98d9cd55"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Graph Rewriting as a Foundation for Science and Technology (and \
+the Universe)",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=CLXyDCISsUY"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=CLXyDCISsUY"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563592258067`*^9, 
+  3.83285637852925*^9}, {3.8328564203770494`*^9, 3.8328564203786716`*^9}, {
+  3.832856460408049*^9, 3.8328564604082317`*^9}, {3.832857068096691*^9, 
+  3.832857068096882*^9}},ExpressionUUID->"1b4f08c0-a444-4d50-91d8-\
+91362951a439"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Why Does the Universe Exist? Some Perspectives from Our Physics \
+Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2021/04/why-does-the-universe-\
+exist-some-perspectives-from-our-physics-project/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2021/04/why-does-the-universe-exist-\
+some-perspectives-from-our-physics-project/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563592258067`*^9, 
+  3.83285637852925*^9}, {3.8328564203770494`*^9, 3.8328564203786716`*^9}, {
+  3.832856460408049*^9, 3.8328564604082317`*^9}, {3.832857069501248*^9, 
+  3.8328570812150187`*^9}, {3.832857128714295*^9, 3.832857128716085*^9}, {
+  3.8328571718070717`*^9, 
+  3.8328571718072767`*^9}},ExpressionUUID->"417180fe-3427-433c-86e6-\
+02cf5f2dcbc4"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["What Is Consciousness? Some New Perspectives from Our Physics \
+Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2021/03/what-is-consciousness-\
+some-new-perspectives-from-our-physics-project/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2021/03/what-is-consciousness-some-\
+new-perspectives-from-our-physics-project/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563592258067`*^9, 
+  3.83285637852925*^9}, {3.8328564203770494`*^9, 3.8328564203786716`*^9}, {
+  3.832856460408049*^9, 3.8328564604082317`*^9}, {3.832857069501248*^9, 
+  3.8328570812150187`*^9}, {3.832857128714295*^9, 3.832857128716085*^9}, {
+  3.83285717309258*^9, 3.83285721018536*^9}, {3.832857266384797*^9, 
+  3.832857266386243*^9}},ExpressionUUID->"e82bdb0f-4196-4a37-a133-\
+ed775ef6ca73"],
+
+Cell[TextData[{
+ "SW: \[OpenCurlyDoubleQuote]",
+ ButtonBox["How Inevitable Is the Concept of Numbers?",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://writings.stephenwolfram.com/2021/05/how-inevitable-is-the-\
+concept-of-numbers/"], None},
+  ButtonNote->
+   "https://writings.stephenwolfram.com/2021/05/how-inevitable-is-the-concept-\
+of-numbers/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563592258067`*^9, 
+  3.83285637852925*^9}, {3.8328564203770494`*^9, 3.8328564203786716`*^9}, {
+  3.832856460408049*^9, 3.8328564604082317`*^9}, {3.832857069501248*^9, 
+  3.8328570812150187`*^9}, {3.832857128714295*^9, 3.832857128716085*^9}, {
+  3.83285717309258*^9, 3.832857201314691*^9}, {3.8328572363713503`*^9, 
+  3.8328572363728147`*^9}},ExpressionUUID->"621d6e35-16b7-4daa-831b-\
+6eaca2225cfc"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Hypergraph Rewriting and the Wolfram Model",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=TJ5RkdGObGE"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=TJ5RkdGObGE"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.817123121564636*^9, 3.8171231779604077`*^9}, {
+  3.832768137554628*^9, 3.8327682117059097`*^9}, {3.83276828426094*^9, 
+  3.8327682988479424`*^9}, {3.832768711483272*^9, 3.8327687228995233`*^9}, {
+  3.8327906025095387`*^9, 3.8327906025096936`*^9}, {3.8328563592258067`*^9, 
+  3.83285637852925*^9}, {3.8328564203770494`*^9, 3.8328564203786716`*^9}, {
+  3.832856463702446*^9, 3.832856469928851*^9}, {3.8328565007144217`*^9, 
+  3.8328565007159*^9}},ExpressionUUID->"c03d7f3a-76c5-49be-b104-50fe1f6f16d4"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Computing the Universe (TomorrowScale Podcast)",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://tomorrowscale.com/computing-the-universe-jonathan-gorard"], 
+    None},
+  ButtonNote->
+   "https://tomorrowscale.com/computing-the-universe-jonathan-gorard"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.816519441455982*^9, 3.8165194431455107`*^9}, {
+  3.816519525272796*^9, 3.816519539072225*^9}, {3.8327682242374268`*^9, 
+  3.832768224417643*^9}},ExpressionUUID->"1e23d3bd-ba12-4be6-87e3-\
+ba59c1d2154c"],
+
+Cell[TextData[{
+ "JG: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Oxford ZX-Calculus Seminar: Wolfram Model and the ZX-Calculus",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.youtube.com/watch?v=k1OfnnO2EjM"], None},
+  ButtonNote->"https://www.youtube.com/watch?v=k1OfnnO2EjM"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.816519441455982*^9, 3.8165194433060226`*^9}, {
+  3.816519549538645*^9, 3.816519564544971*^9}, {3.8327682269581456`*^9, 
+  3.832768227173176*^9}},ExpressionUUID->"becb9355-cf3c-443e-aa88-\
+ac0b8fa68aec"],
+
+Cell[TextData[{
+ "Graham Van Goffrier: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Full Discretization of Local Gauge Invariance",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://community.wolfram.com/groups/-/m/t/2030337"], None},
+  ButtonNote->"https://community.wolfram.com/groups/-/m/t/2030337"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.816519441455982*^9, 3.8165194434724407`*^9}, {
+  3.816519572543208*^9, 3.8165195901697826`*^9}, {3.81651987346665*^9, 
+  3.8165199132254143`*^9}},ExpressionUUID->"7e13a217-cb4d-46b8-ba85-\
+39b84bd499b1"],
+
+Cell[TextData[{
+ "Cameron Beetar: \[OpenCurlyDoubleQuote]",
+ ButtonBox["A Path to Higher Order Corrections for Einstein's Equations",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://community.wolfram.com/groups/-/m/t/2030275"], None},
+  ButtonNote->"https://community.wolfram.com/groups/-/m/t/2030275"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.816519441455982*^9, 3.8165194436520247`*^9}, {
+  3.81651959741612*^9, 
+  3.816519610363974*^9}},ExpressionUUID->"f785803a-2aae-48dc-871f-\
+51b8f5793f93"],
+
+Cell[TextData[{
+ "Yorick Zeschke: \[OpenCurlyDoubleQuote]",
+ ButtonBox["Growth Functions, Rates and Classes of String-Based Multiway \
+Systems",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/bulletins/page/2/"], None},
+  ButtonNote->"https://www.wolframphysics.org/bulletins/page/2/"],
+ "\[CloseCurlyDoubleQuote]"
+}], "Subitem",
+ CellChangeTimes->{{3.8165197918397827`*^9, 3.816519839220394*^9}, {
+  3.832790613781395*^9, 3.832790632143314*^9}, {3.8327907620117273`*^9, 
+  3.832790762011952*^9}},ExpressionUUID->"0a0351ec-59ea-4644-9008-\
+b052b9a7ab42"],
+
+Cell[TextData[{
+ "Wolfram Physics Project: ",
+ ButtonBox["Bulletins",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolframphysics.org/bulletins"], None},
+  ButtonNote->"https://www.wolframphysics.org/bulletins"]
+}], "Subitem",
+ CellChangeTimes->{{3.816519700752253*^9, 3.816519752900022*^9}, {
+  3.832768433257368*^9, 
+  3.832768433258028*^9}},ExpressionUUID->"b44121ae-a0bd-405a-a7bf-\
+6acf780b94e0"],
+
+Cell[TextData[ButtonBox["Wolfram model implementation on GitHub",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["https://github.com/maxitg/SetReplace"], None},
+ ButtonNote->"https://github.com/maxitg/SetReplace"]], "Subitem",
+ CellChangeTimes->{{3.816519700752253*^9, 3.816519752900022*^9}, {
+  3.832768433629941*^9, 
+  3.832768454932384*^9}},ExpressionUUID->"26cf43c5-89c8-4bd7-8077-\
+daaf74faea48"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{571.8, 524.4},
+WindowMargins->{{284.4, Automatic}, {18, Automatic}},
+FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (May 11, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4bfa216e-2d32-41c2-a746-bbd78d3fa5a4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 962, 16, 357, "Title",ExpressionUUID->"8f7d71e5-8484-4ec9-b7f8-6f29f7510e18"],
+Cell[CellGroupData[{
+Cell[1567, 42, 681, 10, 54, "Subsection",ExpressionUUID->"648d0143-50fb-435b-9c0d-114628fc1b45"],
+Cell[2251, 54, 1172, 20, 45, "Subsubsection",ExpressionUUID->"ec3ea6cb-6bbf-437a-90a2-96f2fdb1ed45",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}],
+Cell[CellGroupData[{
+Cell[3448, 78, 378, 6, 32, "Item",ExpressionUUID->"e4b53f08-a24c-42b4-ba72-0cfe52b42174"],
+Cell[3829, 86, 544, 13, 45, "Subitem",ExpressionUUID->"82e02fdf-511c-44d3-bc0d-79d6079c2dd3"],
+Cell[4376, 101, 544, 13, 45, "Subitem",ExpressionUUID->"34e3befd-94f0-48f7-9536-a301957e6821"],
+Cell[4923, 116, 691, 14, 64, "Subitem",ExpressionUUID->"c9134b9f-2db9-4051-accc-a8ba50f4540a"],
+Cell[5617, 132, 680, 15, 45, "Subitem",ExpressionUUID->"a5485a10-18c4-4e69-912b-f53b52f13a08"],
+Cell[6300, 149, 597, 13, 26, "Subitem",ExpressionUUID->"716831b6-f3dc-472d-a9c4-b17b067b9ce1"],
+Cell[6900, 164, 749, 17, 26, "Subitem",ExpressionUUID->"0930b246-cb4d-4d89-8312-f97817d9a6dd"],
+Cell[7652, 183, 450, 12, 26, "Subitem",ExpressionUUID->"8fd50211-c878-4b9f-ad80-b70a56f8249b"],
+Cell[8105, 197, 528, 13, 26, "Subitem",ExpressionUUID->"805d97ea-46f6-43e4-9d8b-dff9eb1b7d91"],
+Cell[CellGroupData[{
+Cell[8658, 214, 560, 12, 26, "Subitem",ExpressionUUID->"465e33ca-fdac-43f5-96c9-59d5c94bcb93"],
+Cell[9221, 228, 515, 14, 25, "Subsubitem",ExpressionUUID->"7ca24e9b-f5b7-4a43-8aeb-9be94ddb46a2"]
+}, Open  ]],
+Cell[9751, 245, 430, 11, 26, "Subitem",ExpressionUUID->"a0d64b31-bfd1-45cc-9a5d-790f5a2b5d9a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10218, 261, 404, 7, 32, "Item",ExpressionUUID->"8ed95db7-cd59-4996-be8e-893ec258ee1a"],
+Cell[10625, 270, 570, 13, 26, "Subitem",ExpressionUUID->"5425bf00-3c56-4fe7-a066-e2ae502fd8e6"],
+Cell[11198, 285, 536, 13, 45, "Subitem",ExpressionUUID->"9ddb7561-7c3a-4656-abfa-6aec79f0df58"],
+Cell[11737, 300, 574, 13, 45, "Subitem",ExpressionUUID->"c2b94b6a-1ec2-4e54-8087-7c5b2046badd"],
+Cell[12314, 315, 691, 15, 45, "Subitem",ExpressionUUID->"8bc51a0f-8787-4d8a-99e3-8ab36d87dd7a"],
+Cell[13008, 332, 679, 14, 45, "Subitem",ExpressionUUID->"56fc4462-5a35-41b1-8aad-cbf2edf64ea5"],
+Cell[CellGroupData[{
+Cell[13712, 350, 770, 15, 26, "Subitem",ExpressionUUID->"de0f4370-6b1e-4dac-b2c8-f0ed97586fc9"],
+Cell[14485, 367, 432, 10, 25, "Subsubitem",ExpressionUUID->"fc604e92-924e-4e12-a825-38138488b939"],
+Cell[14920, 379, 440, 10, 25, "Subsubitem",ExpressionUUID->"75e08320-97b8-48b6-b402-ecb08ce8388f"],
+Cell[15363, 391, 486, 10, 25, "Subsubitem",ExpressionUUID->"c0a1637a-f53f-4085-ae15-72fc3667ec60"]
+}, Open  ]],
+Cell[15864, 404, 570, 12, 26, "Subitem",ExpressionUUID->"c3ef54db-c970-4ce7-8812-64cfc9548a9c"],
+Cell[16437, 418, 497, 11, 45, "Subitem",ExpressionUUID->"2fdccd1a-570c-468b-bae3-9260f0427f3d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16971, 434, 410, 7, 32, "Item",ExpressionUUID->"74128193-eaca-4bd3-982e-101420d794e5"],
+Cell[17384, 443, 714, 15, 64, "Subitem",ExpressionUUID->"b06146f7-d442-4d80-9cb1-54386bd04da0"],
+Cell[18101, 460, 698, 15, 45, "Subitem",ExpressionUUID->"1d15eccc-d952-4055-b97c-e2e23cda8376"],
+Cell[18802, 477, 628, 14, 45, "Subitem",ExpressionUUID->"34a970ee-f18e-4b66-a77b-6778c06f53b0"],
+Cell[19433, 493, 568, 11, 26, "Subitem",ExpressionUUID->"cfe43ded-e0bd-4735-a521-ad7339ffbd19"],
+Cell[20004, 506, 713, 16, 45, "Subitem",ExpressionUUID->"c7d5fa88-2478-4cce-86e5-60af935cdd95"],
+Cell[20720, 524, 556, 12, 26, "Subitem",ExpressionUUID->"36daed92-eeac-439b-a3da-fe39d13f08c7"],
+Cell[21279, 538, 719, 16, 45, "Subitem",ExpressionUUID->"0a0d527c-a387-44ff-96a4-6edb409579f4"],
+Cell[22001, 556, 624, 16, 45, "Subitem",ExpressionUUID->"57257081-934f-49b3-9bb7-354bc040713f"],
+Cell[22628, 574, 659, 15, 26, "Subitem",ExpressionUUID->"fc7c934e-dc76-49bd-ac39-ccc5823983c0"],
+Cell[23290, 591, 730, 15, 45, "Subitem",ExpressionUUID->"fdab4d0d-9dc5-41a9-8535-01ad98d9cd55"],
+Cell[24023, 608, 878, 17, 45, "Subitem",ExpressionUUID->"1b4f08c0-a444-4d50-91d8-91362951a439"],
+Cell[24904, 627, 1128, 22, 45, "Subitem",ExpressionUUID->"417180fe-3427-433c-86e6-02cf5f2dcbc4"],
+Cell[26035, 651, 1162, 22, 45, "Subitem",ExpressionUUID->"e82bdb0f-4196-4a37-a133-ed775ef6ca73"],
+Cell[27200, 675, 1081, 21, 26, "Subitem",ExpressionUUID->"621d6e35-16b7-4daa-831b-6eaca2225cfc"],
+Cell[28284, 698, 837, 15, 26, "Subitem",ExpressionUUID->"c03d7f3a-76c5-49be-b104-50fe1f6f16d4"],
+Cell[29124, 715, 594, 14, 26, "Subitem",ExpressionUUID->"1e23d3bd-ba12-4be6-87e3-ba59c1d2154c"],
+Cell[29721, 731, 558, 12, 45, "Subitem",ExpressionUUID->"becb9355-cf3c-443e-aa88-ac0b8fa68aec"],
+Cell[30282, 745, 574, 12, 26, "Subitem",ExpressionUUID->"7e13a217-cb4d-46b8-ba85-39b84bd499b1"],
+Cell[30859, 759, 533, 12, 45, "Subitem",ExpressionUUID->"f785803a-2aae-48dc-871f-51b8f5793f93"],
+Cell[31395, 773, 589, 13, 45, "Subitem",ExpressionUUID->"0a0351ec-59ea-4644-9008-b052b9a7ab42"],
+Cell[31987, 788, 419, 11, 26, "Subitem",ExpressionUUID->"b44121ae-a0bd-405a-a7bf-6acf780b94e0"],
+Cell[32409, 801, 401, 8, 26, "Subitem",ExpressionUUID->"26cf43c5-89c8-4bd7-8077-daaf74faea48"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
